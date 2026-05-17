@@ -57,6 +57,13 @@ async function onSearch(event) {
 
     if (totalHits > 15) {
       showLoadMoreButton();
+    } else {
+      hideLoadMoreButton();
+
+      iziToast.info({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: "topRight",
+      });
     }
   } catch {
     iziToast.error({
@@ -70,13 +77,14 @@ async function onSearch(event) {
 
 async function onLoadMore() {
   currentPage += 1;
+
+  hideLoadMoreButton();
   showLoader();
 
   try {
     const data = await getImagesByQuery(currentQuery, currentPage);
 
     createGallery(data.hits);
-
     smoothScroll();
 
     const totalPages = Math.ceil(totalHits / 15);
@@ -88,6 +96,8 @@ async function onLoadMore() {
         message: "We're sorry, but you've reached the end of search results.",
         position: "topRight",
       });
+    } else {
+      showLoadMoreButton();
     }
   } catch {
     iziToast.error({
