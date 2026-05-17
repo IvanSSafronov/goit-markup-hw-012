@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/goit-markup-hw-012/",
+    "build": "vite build --base=/goit-markup-hw-12/",
     "preview": "vite preview"
   },
   "devDependencies": {
